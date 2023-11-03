@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">mtr_dev_post_listing.mtr_dev_post_listing_data_source</item>
+            <item name="deps" xsi:type="string">mtr_dev_post_listing.mtr_dev_post_listing_data_source</item>
+        </item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add new new post</label>
+            </button>
+        </buttons>
+        <spinner>mtr_dev_post_listing_columns</spinner>
+        <!--deps>
+            <dep>mtr_dev_post_listing.mtr_dev_post_listing_data_source</dep>
+        </deps-->
+    </settings>
+
+    <dataSource name="mtr_dev_post_listing_data_source" component="Magento_Ui\js\grid\provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">post_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Mtr_Dev::post</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="mtr_dev_post_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>post_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+       
+        <bookmark name="bookmarks" />
+        <columnsControls name="columns_controls" />
+        <filterSearch name="fulltext" />
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+            <filterSelect name="status" provider="${ $.parentName }">
+                <settings>
+                    <captionValue>0</captionValue>
+                    <options class="Mtr\Dev\Ui\Component\Post\Listing\Column\Status"/>
+                    <label translate="true">Status</label>
+                    <dataScope>status</dataScope>
+                    <!--imports>
+                        <link name="visible">ns = ${ $.ns }, index = ${ $.index }:visible</link>
+                    </imports-->
+                </settings>
+            </filterSelect>
+        </filters>
+
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="mtr/post/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <url path="mtr/post/massDisable"/>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
+            </action>
+            <action name="enable">
+                <settings>
+                    <url path="mtr/post/massEnable"/>
+                    <type>enable</type>
+                    <label translate="true">Enable</label>
+                </settings>
+            </action>
+            <action name="edit">
+                <settings>
+                    <callback>
+                        <target>editSelected</target>
+                        <provider>mtr_dev_post_listing.mtr_dev_post_listing.mtr_dev_post_listing_columns_editor</provider>
+                    </callback>
+                    <type>edit</type>
+                    <label translate="true">Edit</label>
+                </settings>
+            </action>
+        </massaction>
+        
+        <paging name="listing_paging" />
+        <exportButton name="export_button" />
+    </listingToolbar>
+    <columns name="mtr_dev_post_listing_columns">
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="mtr/post/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">post_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">mtr_dev_post_listing.mtr_dev_post_listing.mtr_dev_post_listing_columns_editor</param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">mtr_dev_post_listing.mtr_dev_post_listing.mtr_dev_post_listing_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>post_id</indexField>
+                <resizeEnabled>true</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn>
+        <column name="post_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Post ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="status">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <options class="Mtr\Dev\Ui\Component\Post\Listing\Column\Status"/>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="name">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        
+        <column name="created_at">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Created</label>
+            </settings>
+        </column>
+        <column name="username">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Created by</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Mtr\Dev\Ui\Component\Post\Listing\Column\PageActions">
+            <settings>
+                <indexField>page_id</indexField>
+                <resizeEnabled>true</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+    
+</listing>

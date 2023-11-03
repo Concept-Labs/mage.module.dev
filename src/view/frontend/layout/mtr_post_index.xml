@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="content">
+        <block class="Mtr\Dev\Block\Post" name="mtr_post_index" template="Mtr_Dev::post.phtml">
+            <arguments>
+                <argument name="data" xsi:type="array">
+                    <item name="testString" xsi:type="string">Some Text</item>
+                    <item name="str" xsi:type="string">Another Text</item>
+                </argument>
+                <!-- arguments for .phtml file -->
+                <argument name="trigger_text" translate="true" xsi:type="string">Trigger Text</argument>
+
+                <!-- config rendered by $block->getJsLayout() -->
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="autoOpen" xsi:type="boolean">true</item>
+                    <item name="buttons" xsi:type="array">
+                        <item name="buttonOne" xsi:type="array">
+                            <item name="text" translate="true" xsi:type="string">Button One</item>
+                            <item name="class" xsi:type="string">button-one-class</item>
+                        </item>
+                        <item name="buttonTwo" xsi:type="array">
+                            <item name="text" translate="true" xsi:type="string">Button Two</item>
+                            <item name="class" xsi:type="string">button-two-class</item>
+                        </item>
+                    </item>
+                    <item name="closeText" translate="true" xsi:type="string">Close</item>
+                    <item name="clickableOverlay" xsi:type="boolean">false</item>
+                    <item name="focus" xsi:type="string">[data-role="closeBtn"]</item>
+                    <item name="innerScroll" xsi:type="boolean">false</item>
+                    <item name="modalClass" xsi:type="string">modalClass</item>
+                    <item name="modalLeftMargin" xsi:type="number">45</item>
+                    <item name="responsive" xsi:type="boolean">false</item>
+                    <item name="title" translate="true" xsi:type="string">Modal Title</item>
+                    <item name="type" xsi:type="string">popup</item>
+                </argument>
+
+            </arguments>
+            <!-- modal contents, static cms block -->
+            <block class="Magento\Cms\Block\Block" name="modal.content">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">contact-us-info</argument>
+                </arguments>
+            </block>
+        </block>
+    </referenceContainer>
+</page>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Mtr_Dev::dev" title="Mtr DEV" sortOrder="1">
+                    <resource id="Mtr_Dev::index" title="Mtr Dev Index" sortOrder="10"/>
+                    <resource id="Mtr_Dev::post" title="Mtr Posts" sortOrder="10">
+                        <resource id="Mtr_Dev::post_save" title="Save Post" translate="title" sortOrder="10"/>
+                        <resource id="Mtr_Dev::post_delete" title="Delete Post" translate="title" sortOrder="20"/>
+                    </resource>
+                    <resource id="Mtr_Dev::mtr_config" title="Mtr Configuration" sortOrder="99" />
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Mtr_Dev::mtr_store_config" title="Mtr Dev" sortOrder="1"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

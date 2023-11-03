@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Mview/etc/mview.xsd">
+    <view id="mtr_dev_post_indexer" class="Mtr\Dev\Model\Indexer\Post" group="indexer">
+        <subscriptions>
+            <table name="mtr_dev_post" entity_column="post_id" />
+        </subscriptions>
+    </view>
+</config>

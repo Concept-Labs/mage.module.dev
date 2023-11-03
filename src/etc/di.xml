@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    
+    <preference for="Mtr\Dev\Block\Dev" type="Mtr\Dev\Block\DevPreference"/>
+    
+    <type name="Mtr\Dev\Block\Dev">
+        <plugin name="Mtr_Dev_Block_DevPlugin" type="Mtr\Dev\Plugin\Block\Dev\Plugin" sortOrder="10" disabled="false"/>
+    </type>
+
+    <virtualType name="VirtualData" type="Mtr\Dev\Helper\Data">
+        <arguments>
+            <argument name="somedata" xsi:type="string">di_data</argument>
+        </arguments>
+    </virtualType>
+    <type name="Mtr\Dev\Controller\Dev\Index">
+        <arguments>
+            <argument name="helper" xsi:type="object">VirtualData</argument>
+            <argument name="orighelper" xsi:type="object">Mtr\Dev\Helper\Data\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Mtr\Dev\Controller\Dev\Index">
+        <arguments>
+            <argument name="helper" xsi:type="object">VirtualData</argument>
+            <argument name="orighelper" xsi:type="object">Mtr\Dev\Helper\Data\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mtr_dev_ping" xsi:type="object">Mtr\Dev\Console\MtrDev</item>
+            </argument>
+        </arguments>
+    </type>
+        
+</config>

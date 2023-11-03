@@ -1,0 +1,22 @@
+{
+    "name": "concept-labs.mage/module-dev",
+    "description": "Mtr m2 dev",
+    "require": {
+        "magento/module-ui" : "*",
+        "magento/framework" : "*"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "autoload": {
+        "files": [ 
+            "src/registration.php" 
+        ],
+        "psr-4": {
+            "Mtr\\Dev\\": "src/"
+        }
+    }
+}

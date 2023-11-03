@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mtr_Dev::dev" title="Mtr Dev Test" module="Mtr_Dev" sortOrder="1" resource="Mtr_Dev::dev"/>
+        <add id="Mtr_Dev::post" title="Mtr Dev" module="Mtr_Dev" sortOrder="10" action="mtr/dev/index" resource="Mtr_Dev::index" parent="Mtr_Dev::dev"/>
+        <add id="Mtr_Dev::index" title="Mtr Dev Posts" module="Mtr_Dev" sortOrder="20" action="mtr/post" resource="Mtr_Dev::post" parent="Mtr_Dev::dev"/>
+        <add id="Mtr_Dev::mtr_configuration" title="Mtr Configuration" module="Mtr_Dev" sortOrder="99" parent="Mtr_Dev::dev" action="adminhtml/system_config/edit/section/mtr_dev" resource="Mtr_Dev::mtr_config"/>
+    </menu>
+</config>

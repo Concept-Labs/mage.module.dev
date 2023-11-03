@@ -1,0 +1,19 @@
+<div style="border:1px solid silver;padding:2em;">
+    <h3>Knockout tests</h3>
+    <div id="mtr_dev-knockout-test" data-bind="scope:'mtr_dev-ko-test'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "mtr_dev-ko-test": {
+                    "component": "Mtr_Dev/js/ko_test"
+                }
+            }
+        }
+    }
+}
+    </script>
+    </div>
+</div>

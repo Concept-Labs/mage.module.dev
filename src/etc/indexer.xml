@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="mtr_dev_post_indexer" view_id="mtr_dev_post_indexer" class="Mtr\Dev\Model\Indexer\Post">
+        <title translate="true">Mtr Dev Post Indexer</title>
+        <description translate="true">Mtr of custom indexer</description>
+    </indexer>
+</config>
