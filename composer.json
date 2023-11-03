@@ -1,5 +1,5 @@
 {
-    "name": "concept-labs.mage/module-dev",
+    "name": "concept-labs/mage.module.dev",
     "description": "Mtr m2 dev",
     "require": {
         "magento/module-ui" : "*",
